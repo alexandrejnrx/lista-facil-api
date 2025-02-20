@@ -19,4 +19,14 @@ public class UsuarioService {
         return usuarioRepository.findAll();
     }
 
+    public void cadastrarUsuario(UsuarioModel usuario) {
+        String emailParaCadastrar = usuario.getEmail();
+
+        if (usuarioRepository.findByEmail(emailParaCadastrar) != null) {
+            String message = "Usuário já cadastrado";
+        }
+
+        usuarioRepository.save(usuario);
+    }
+
 }
