@@ -1,7 +1,7 @@
 package br.com.listafacil.service;
 
-import br.com.listafacil.models.UsuarioModel;
-import br.com.listafacil.repositories.UsuarioRepository;
+import br.com.listafacil.model.Usuario;
+import br.com.listafacil.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +15,11 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<UsuarioModel> listarUsuarios() {
+    public List<Usuario> listarUsuarios() {
         return usuarioRepository.findAll();
     }
 
-    public void cadastrarUsuario(UsuarioModel usuario) {
+    public void cadastrarUsuario(Usuario usuario) {
         String emailParaCadastrar = usuario.getEmail();
 
         if (usuarioRepository.findByEmail(emailParaCadastrar) != null) {

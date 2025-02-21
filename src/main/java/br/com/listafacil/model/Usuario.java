@@ -1,4 +1,4 @@
-package br.com.listafacil.models;
+package br.com.listafacil.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import lombok.Data;
 @Entity
 @Table(name = "usuarios")
 @Data
-public class UsuarioModel {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
