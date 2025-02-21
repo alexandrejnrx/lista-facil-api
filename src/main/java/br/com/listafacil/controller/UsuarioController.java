@@ -1,5 +1,6 @@
 package br.com.listafacil.controller;
 
+import br.com.listafacil.dto.UsuarioRequestDTO;
 import br.com.listafacil.model.Usuario;
 import br.com.listafacil.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +23,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/cadastrar-usuario")
-    public void cadastrarUsuario(@RequestBody Usuario usuario) {
-        usuarioService.cadastrarUsuario(usuario);
+    public void cadastrarUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        usuarioService.cadastrarUsuario(usuarioRequestDTO);
     }
 
 }
