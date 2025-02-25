@@ -1,6 +1,7 @@
 package br.com.listafacil.dto.converter;
 
 import br.com.listafacil.dto.UsuarioRequestDTO;
+import br.com.listafacil.dto.UsuarioResponseDTO;
 import br.com.listafacil.model.Usuario;
 
 public final class UsuarioConverter {
@@ -15,13 +16,13 @@ public final class UsuarioConverter {
         return usuario;
     }
 
-    public static UsuarioRequestDTO converterEntidadeParaDTO(Usuario usuario) {
-        UsuarioRequestDTO usuarioRequestDTO = new UsuarioRequestDTO();
+    public static UsuarioResponseDTO converterEntidadeParaDTO(Usuario usuario) {
+        UsuarioResponseDTO usuarioResponseDTO = new UsuarioResponseDTO();
 
-        usuarioRequestDTO.setNome(usuario.getNome());
-        usuarioRequestDTO.setEmail(usuario.getEmail());
+        usuarioResponseDTO.setNome(usuario.getNome());
+        usuarioResponseDTO.setEmail(usuario.getEmail());
 
-        return usuarioRequestDTO;
+        return usuarioResponseDTO;
     }
 
 }

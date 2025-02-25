@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,8 +21,16 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuario> listarUsuarios() {
-        return usuarioRepository.findAll();
+    public List<UsuarioResponseDTO> listarUsuarios() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        List<UsuarioResponseDTO> usuarioResponseDTOS = new ArrayList<>();
+
+        for (Usuario usuario : usuarios) {
+            usuarioResponseDTOS.add(UsuarioConverter.converterEntidadeParaDTO(usuario));
+        }
+
+        return usuarioResponseDTOS;
     }
 
     public void cadastrarUsuario(UsuarioRequestDTO usuarioRequestDTO) {
