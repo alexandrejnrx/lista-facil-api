@@ -1,6 +1,7 @@
 package br.com.listafacil.service;
 
 import br.com.listafacil.dto.UsuarioRequestDTO;
+import br.com.listafacil.dto.UsuarioResponseDTO;
 import br.com.listafacil.dto.converter.UsuarioConverter;
 import br.com.listafacil.model.Usuario;
 import br.com.listafacil.repository.UsuarioRepository;
@@ -32,6 +33,12 @@ public class UsuarioService {
 
         Usuario usuarioParaCadastrar = UsuarioConverter.converterDTOParaEntidade(usuarioRequestDTO);
         usuarioRepository.save(usuarioParaCadastrar);
+    }
+
+    public void deletarUsuario(UsuarioRequestDTO usuarioRequestDTO) {
+        Usuario usuarioParaDeletar = usuarioRepository.findByEmail(usuarioRequestDTO.getEmail());
+
+        usuarioRepository.delete(usuarioParaDeletar);
     }
 
 }

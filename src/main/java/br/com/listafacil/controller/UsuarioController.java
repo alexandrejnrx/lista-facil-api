@@ -27,4 +27,9 @@ public class UsuarioController {
         usuarioService.cadastrarUsuario(usuarioRequestDTO);
     }
 
+    @DeleteMapping("/deletar-usuario")
+    public void deletarUsuario(@RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        usuarioService.deletarUsuario(usuarioRequestDTO);
+    }
+
 }
