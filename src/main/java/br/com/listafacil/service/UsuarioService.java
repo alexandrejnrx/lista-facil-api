@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -22,15 +23,10 @@ public class UsuarioService {
     }
 
     public List<UsuarioResponseDTO> listarUsuarios() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-
-        List<UsuarioResponseDTO> usuarioResponseDTOS = new ArrayList<>();
-
-        for (Usuario usuario : usuarios) {
-            usuarioResponseDTOS.add(UsuarioConverter.converterEntidadeParaDTO(usuario));
-        }
-
-        return usuarioResponseDTOS;
+        return usuarioRepository.findAll()
+                .stream()
+                .map(UsuarioConverter::converterEntidadeParaDTO)
+                .collect(Collectors.toList());
     }
 
     public void cadastrarUsuario(UsuarioRequestDTO usuarioRequestDTO) {
