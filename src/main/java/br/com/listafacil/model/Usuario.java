@@ -1,15 +1,19 @@
 package br.com.listafacil.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "usuarios")
-@Data
+@Getter
+@Setter
 public class Usuario {
 
     @Id
@@ -17,6 +21,8 @@ public class Usuario {
     private Integer id;
     private String nome;
     private String email;
+    @Getter(AccessLevel.NONE)
+    @JsonIgnore
     private String senha;
 
 }

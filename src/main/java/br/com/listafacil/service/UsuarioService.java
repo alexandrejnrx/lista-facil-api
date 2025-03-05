@@ -39,7 +39,7 @@ public class UsuarioService {
         String emailNormalizado = usuarioRequestDTO.getEmail().toLowerCase();
 
         if (usuarioRepository.findByEmail(emailNormalizado) != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_EMAIL_CADASTRADO + usuarioRequestDTO.getEmail());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_EMAIL_CADASTRADO);
         }
 
         Usuario usuarioParaCadastrar = UsuarioConverter.converterDTOParaEntidade(usuarioRequestDTO);
