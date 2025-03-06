@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-security:3.4.3")
     implementation("org.apache.commons:commons-lang3:3.17.0")
     annotationProcessor("org.projectlombok:lombok:1.18.36")
     compileOnly("org.projectlombok:lombok:1.18.36")

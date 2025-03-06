@@ -7,6 +7,7 @@ import br.com.listafacil.model.Usuario;
 import br.com.listafacil.repository.UsuarioRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,9 +22,13 @@ public class UsuarioService {
     private static final String ERRO_EMAIL_CADASTRADO = "E-mail já cadastrado!";
     private static final String ERRO_CAMPO_OBRIGATORIO = "Preencha todos os campos!";
     private static final String ERRO_EMAIL_INVALIDO = "O e-mail informado é invalido.";
+    private static final String ERRO_EMAIL_INCORRETO = "E-mail incorreto!";
+    private static final String ERRO_SENHA_INCORRETA = "Senha incorreta!";
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UsuarioResponseDTO> listarUsuarios() {
@@ -43,6 +48,7 @@ public class UsuarioService {
         }
 
         Usuario usuarioParaCadastrar = UsuarioConverter.converterDTOParaEntidade(usuarioRequestDTO);
+        usuarioParaCadastrar.setSenha(passwordEncoder.encode(usuarioRequestDTO.getSenha()));
         usuarioRepository.save(usuarioParaCadastrar);
     }
 
@@ -65,6 +71,14 @@ public class UsuarioService {
 
     public void deletarUsuario(UsuarioRequestDTO usuarioRequestDTO) {
         Usuario usuarioParaDeletar = usuarioRepository.findByEmail(usuarioRequestDTO.getEmail());
+
+        if (usuarioParaDeletar == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_EMAIL_INCORRETO);
+        }
+
+        if (!passwordEncoder.matches(usuarioRequestDTO.getSenha(), usuarioParaDeletar.getSenha())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ERRO_SENHA_INCORRETA);
+        }
 
         usuarioRepository.delete(usuarioParaDeletar);
     }
