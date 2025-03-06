@@ -2,7 +2,6 @@ package br.com.listafacil.controller;
 
 import br.com.listafacil.dto.UsuarioRequestDTO;
 import br.com.listafacil.dto.UsuarioResponseDTO;
-import br.com.listafacil.model.Usuario;
 import br.com.listafacil.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
