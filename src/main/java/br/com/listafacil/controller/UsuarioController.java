@@ -32,4 +32,9 @@ public class UsuarioController {
         usuarioService.deletarUsuario(usuarioRequestDTO);
     }
 
+    @PutMapping("/atualizar-usuario/{id}")
+    public void atualizarDadosUsuario(@PathVariable("id") Integer id, @RequestBody UsuarioRequestDTO usuarioRequestDTO) {
+        usuarioService.atualizarDadosUsuario(id, usuarioRequestDTO);
+    }
+
 }
